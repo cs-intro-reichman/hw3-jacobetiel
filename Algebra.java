@@ -9,12 +9,12 @@ public class Algebra {
 	   // System.out.println(plus(-222,-33));   // 2 + 3
 	   // System.out.println(minus(7,2));  // 7 - 2
    		//System.out.println(minus(-2,7));  // 2 - 7
- 		System.out.println(times(3,-3));  // 3 * 4
+ 		//System.out.println(times(3,-3));  // 3 * 4
    		//System.out.println(plus(2,times(4,2)));  // 2 + 4 * 2
    		//System.out.println(pow(5,3));      // 5^3
    		//System.out.println(pow(3,5));      // 3^5
    		//System.out.println(div(12,3));   // 12 / 3    
-   		//System.out.println(div(5,5));    // 5 / 5  
+   		System.out.println(div(8,-4));    // 5 / 5  
    		//System.out.println(div(25,7));   // 25 / 7
    		//System.out.println(mod(25,7));   // 25 % 7
    		//System.out.println(mod(120,6));  // 120 % 6    
@@ -100,18 +100,44 @@ public class Algebra {
 	public static int div(int x1, int x2) {
 		if (x1==x2)
 			return 1;
+		else if (plus(x1, x2)==0)
+			return -1;
 		
-		for (int i=0; i<(x1/2);i++)
-		{
-			if (times(x2,i)==x1)
-				return i;
-			if (times(x2,i)>x1)
-				return i-1;
+		if (x1 > 0 && x2 > 0){
+			for (int i=0; i<x1;i++)
+			{
+				if (times(x2,i)==x1)
+					return i;
+				if (times(x2,i)>x1)
+					return minus(i,1);
+			}
 		}
+		else if (x1<0){
+			for (int i=0; i>x1;i--)
+			{
+				if (times(x2,i)==x1)
+					return i;
+				else if (times(x2,i)<x1)
+					return plus(i,1);
+			}
+		}
+		else if (x2<0){
+			int limit = times (x2,x1);
+			for (int i=0; i>limit;i--)
+			{
+				if (times(x2,i)==x1)
+					return i;
+				else if (times(x2,i)>x1)
+					return plus(i,1);
+			}
+		
+			}
 
+			return 0;
+		}
+	
 
-		return 0;
-	}
+	
 
 	// Returns x1 % x2
 	public static int mod(int x1, int x2) {
