@@ -6,62 +6,163 @@
 public class Algebra {
 	public static void main(String args[]) {
 	    // Tests some of the operations
-	    System.out.println(plus(2,3));   // 2 + 3
-	    System.out.println(minus(7,2));  // 7 - 2
-   		System.out.println(minus(2,7));  // 2 - 7
- 		System.out.println(times(3,4));  // 3 * 4
-   		System.out.println(plus(2,times(4,2)));  // 2 + 4 * 2
-   		System.out.println(pow(5,3));      // 5^3
-   		System.out.println(pow(3,5));      // 3^5
-   		System.out.println(div(12,3));   // 12 / 3    
-   		System.out.println(div(5,5));    // 5 / 5  
-   		System.out.println(div(25,7));   // 25 / 7
-   		System.out.println(mod(25,7));   // 25 % 7
-   		System.out.println(mod(120,6));  // 120 % 6    
-   		System.out.println(sqrt(36));
-		System.out.println(sqrt(263169));
-   		System.out.println(sqrt(76123));
+	   // System.out.println(plus(-222,-33));   // 2 + 3
+	   // System.out.println(minus(7,2));  // 7 - 2
+   		//System.out.println(minus(-2,7));  // 2 - 7
+ 		System.out.println(times(-15,-1));  // 3 * 4
+   		//System.out.println(plus(2,times(4,2)));  // 2 + 4 * 2
+   		//System.out.println(pow(5,3));      // 5^3
+   		//System.out.println(pow(3,5));      // 3^5
+   		//System.out.println(div(12,3));   // 12 / 3    
+   		System.out.println(div(-15,-3));    // 5 / 5  
+   		//System.out.println(div(25,7));   // 25 / 7
+   		//System.out.println(mod(25,7));   // 25 % 7
+   		//System.out.println(mod(120,6));  // 120 % 6    
+   		//System.out.println(sqrt(36));
+		//System.out.println(sqrt(263169));
+   		//System.out.println(sqrt(76123));
 	}  
 
 	// Returns x1 + x2
 	public static int plus(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		if (x2 >0) {
+		for (int i=0; i<x2; i++)
+			{
+				x1++;
+			}
+		}
+		else if (x2 < 0) 
+		{
+			for (int i=0; i>x2; i--) {
+				x1--;
+			}
+
+		}
+		return x1;
+		
 	}
 
 	// Returns x1 - x2
 	public static int minus(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
-	}
-
+		if (x2>0)
+		{
+		for (int i=0; i<x2; i++)
+			{
+				x1--;
+			}
+		}
+		else {
+			for (int i=0; i>x2; i--)
+			{
+				x1++;
+			}
+		}
+		
+		return x1;
+}
 	// Returns x1 * x2
 	public static int times(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		if (x1 == 0 || x2 == 0)
+			return 0;
+		int temp = x1;
+		if (x2 > 0) {
+			for(int i=0; i<x2-1;i++)
+			{
+				x1 = plus(x1,temp);
+			}
+		}
+		else {
+			if (x2 < 0) {
+					for (int i=0; i>=x2;i--) {
+						x1 = minus(x1,temp);
+					}
+			}
+		}
+	
+		return x1;
 	}
+
 
 	// Returns x^n (for n >= 0)
 	public static int pow(int x, int n) {
-		// Replace the following statement with your code
-		return 0;
+		if (n == 0)
+			return 1;
+		int temp = x; 
+		for (int i=0; i<n-1; i++)
+		{
+			x = times(x,temp);
+		}
+		
+		return x;
 	}
 
 	// Returns the integer part of x1 / x2 
 	public static int div(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
-	}
+		if (x1==x2)
+			return 1;
+		else if (plus(x1, x2)==0)
+			return -1;
+		if (x1 <0 && x2 <0) {
+			x1 = times(x1,-1);
+			x2 = times(x2, -1);
+		}
+		if (x1 > 0 && x2 > 0){
+			for (int i=0; i<x1;i++)
+			{
+				if (times(x2,i)==x1)
+					return i;
+				if (times(x2,i)>x1)
+					return minus(i,1);
+			}
+		}
+		else if (x1<0){
+			for (int i=0; i>x1;i--)
+			{
+				if (times(x2,i)==x1)
+					return i;
+				else if (times(x2,i)<x1)
+					return plus(i,1);
+			}
+		}
+		else if (x2<0){
+			int limit = times (x2,x1);
+			for (int i=0; i>limit;i--)
+			{
+				if (times(x2,i)==x1)
+					return i;
+				else if (times(x2,i)>x1)
+					return plus(i,1);
+			}
+		
+			}
+
+			return 0;
+		}
+	
+
+	
 
 	// Returns x1 % x2
 	public static int mod(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		if(x1 < x2)
+			return x1;
+		int temp = div(x1,x2);
+		return minus(x1,(times(temp,x2)));
 	}	
 
 	// Returns the integer part of sqrt(x) 
 	public static int sqrt(int x) {
-		// Replace the following statement with your code
+		if (x<0)
+			return 0;
+		if (x==1)
+			return x;
+		for (int i=1; i<= x/2;i++)
+		{
+			if (pow(i, 2)==x)
+				return i;
+			if (pow(i,2)>x)
+				return i-1;
+		}
 		return 0;
 	}	  	  
 }
